@@ -73,7 +73,7 @@ export default function Navigation({
                 onClick={() => setCurrentTab(item.id)}
                 className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs lg:text-[13px] font-medium transition-all ${
                   isActive
-                    ? 'bg-white text-[#173F35] shadow-sm font-semibold border border-[#E3E8E1]'
+                    ? 'bg-[#EDF3ED] text-[#173F35] font-semibold border border-[#D0DDD0] shadow-sm'
                     : 'text-[#727B74] hover:text-[#173F35] hover:bg-white/60'
                 } ${item.highlight && !isActive ? 'text-[#477C68] font-semibold' : ''}`}
               >
