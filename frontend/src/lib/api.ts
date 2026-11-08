@@ -1,6 +1,25 @@
 // API client for Bodywise AI Companion
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+export const PRODUCTION_API_URL = 'https://bodywise-backend-xoyc.onrender.com';
+
+export function getApiBase(): string {
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host.includes('vercel.app') || host.includes('onrender.com')) {
+      return PRODUCTION_API_URL;
+    }
+    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+      return (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+    }
+  }
+  const envUrl = (process.env.NEXT_PUBLIC_API_URL || '').trim();
+  if (envUrl && envUrl !== 'https://bodywise-backend.onrender.com') {
+    return envUrl.replace(/\/$/, '');
+  }
+  return PRODUCTION_API_URL;
+}
+
+const API_BASE = getApiBase();
 
 function getToken(): string | null {
   if (typeof window !== 'undefined') {
@@ -33,7 +52,8 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_BASE}${endpoint}`, {
+  const base = getApiBase();
+  const res = await fetch(`${base}${endpoint}`, {
     ...options,
     headers,
   });
