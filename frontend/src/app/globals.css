@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --background: #fbf9fe;
-  --foreground: #2d1d3a;
-  --card: #ffffff;
-  --card-foreground: #2d1d3a;
-  --primary: #7c469b;
-  --primary-foreground: #ffffff;
-  --secondary: #f3eef8;
-  --secondary-foreground: #553267;
-  --muted: #f4f0fa;
-  --muted-foreground: #766585;
-  --accent: #945bb7;
-  --accent-foreground: #ffffff;
-  --border: #ebdff3;
+  --background: #F5F5EF;
+  --foreground: #252D29;
+  --card: #FFFFFF;
+  --card-foreground: #252D29;
+  --primary: #173F35;
+  --primary-foreground: #FFFFFF;
+  --secondary: #477C68;
+  --secondary-foreground: #FFFFFF;
+  --muted: #EDF3ED;
+  --muted-foreground: #727B74;
+  --accent: #A8BDA9;
+  --accent-foreground: #173F35;
+  --border: #E3E8E1;
 }
 
 body {
@@ -35,35 +35,42 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #dec7ea;
+  background: #A8BDA9;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ae7ecc;
-}
-
-.wellness-gradient {
-  background: linear-gradient(135deg, #faf7fc 0%, #f4eef9 50%, #f9f4fd 100%);
+  background: #477C68;
 }
 
 .wellness-card {
-  background: #ffffff;
-  border: 1px solid #ebdff3;
-  box-shadow: 0 4px 20px -2px rgba(124, 70, 155, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-  border-radius: 1.25rem;
+  background: #FFFFFF;
+  border: 1px solid #E3E8E1;
+  box-shadow: 0 1px 3px 0 rgba(23, 63, 53, 0.04), 0 4px 16px -2px rgba(23, 63, 53, 0.05);
+  border-radius: 12px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .wellness-card:hover {
-  border-color: #dec7ea;
-  box-shadow: 0 8px 24px -4px rgba(124, 70, 155, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  border-color: #D0DDD0;
+  box-shadow: 0 6px 20px -2px rgba(23, 63, 53, 0.08), 0 2px 6px -1px rgba(23, 63, 53, 0.04);
 }
 
-.lavender-pill {
-  background-color: #f3eef8;
-  color: #7c469b;
-  border: 1px solid #dec7ea;
+.sage-badge {
+  background-color: #EDF3ED;
+  color: #173F35;
+  border: 1px solid #D0DDD0;
   border-radius: 9999px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
+.forest-btn {
+  background-color: #173F35;
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.forest-btn:hover {
+  background-color: #1F4F43;
+}

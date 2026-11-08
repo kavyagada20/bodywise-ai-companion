@@ -158,18 +158,18 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#fbf9fe] flex flex-col items-center justify-center p-4">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#7c469b] to-[#c8a4dc] flex items-center justify-center text-white animate-pulse shadow-soft mb-4">
-          <span className="font-bold text-lg">BW</span>
+      <div className="min-h-screen bg-[#F5F5EF] flex flex-col items-center justify-center p-4">
+        <div className="w-12 h-12 rounded-xl bg-[#173F35] flex items-center justify-center text-white animate-pulse shadow-sm mb-4">
+          <span className="font-bold text-lg text-[#A8BDA9]">BW</span>
         </div>
-        <p className="text-sm font-bold text-[#351a42]">Loading Bodywise AI Companion...</p>
-        <p className="text-xs text-[#766585] mt-1">Initializing multi-agent orchestrator &amp; verified knowledge base</p>
+        <p className="text-sm font-bold text-[#173F35]">Loading Bodywise AI Companion...</p>
+        <p className="text-xs text-[#727B74] mt-1">Initializing multi-agent orchestrator &amp; verified knowledge base</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fbf9fe] text-[#2d1d3a] flex flex-col selection:bg-[#ebdff3] selection:text-[#553267]">
+    <div className="min-h-screen bg-[#F5F5EF] text-[#252D29] flex flex-col selection:bg-[#EDF3ED] selection:text-[#173F35]">
       {/* Global Navigation */}
       <Navigation
         currentTab={currentTab}
@@ -252,11 +252,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto py-6 border-t border-[#ebdff3] bg-white/60 text-center text-xs text-[#766585] px-4">
+      <footer className="mt-auto py-6 border-t border-[#E3E8E1] bg-white text-center text-xs text-[#727B74] px-4">
         <p>
           Bodywise AI Companion — Agentic Personal-Care Assistant • Mosaic Wellness Fellowship Builder Challenge
         </p>
-        <p className="text-[11px] text-[#ae7ecc] mt-1">
+        <p className="text-[11px] text-[#477C68] mt-1">
           Grounding: Verified Be Bodywise public formulations • LangGraph Multi-Agent Architecture
         </p>
       </footer>

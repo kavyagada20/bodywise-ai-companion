@@ -9,9 +9,8 @@ import {
   TrendingUp, 
   User, 
   Settings, 
-  Bell, 
   ShieldCheck,
-  CheckCircle2
+  Leaf
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -40,28 +39,31 @@ export default function Navigation({
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#ebdff3] px-4 lg:px-8 py-3 transition-all">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E3E8E1] px-4 lg:px-8 py-3 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand & Tagline */}
-        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setCurrentTab('overview')}>
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#7c469b] to-[#c8a4dc] flex items-center justify-center text-white shadow-soft">
-            <Sparkles className="w-5 h-5" />
+        <div 
+          className="flex items-center space-x-3 cursor-pointer group" 
+          onClick={() => setCurrentTab('overview')}
+        >
+          <div className="w-9 h-9 rounded-lg bg-[#173F35] flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
+            <Leaf className="w-5 h-5 text-[#A8BDA9]" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-lg tracking-tight text-[#351a42]">Bodywise</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#f3eef8] text-[#7c469b] font-semibold border border-[#dec7ea]">
+              <span className="font-semibold text-lg tracking-tight text-[#173F35]">Bodywise</span>
+              <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#EDF3ED] text-[#173F35] font-semibold border border-[#D0DDD0]">
                 AI Companion
               </span>
             </div>
-            <p className="text-[11px] text-[#766585] hidden sm:block">
-              Your Personal Care Journey, Intelligently Managed.
+            <p className="text-[11px] text-[#727B74] hidden sm:block">
+              Intelligent Personal-Care &amp; Wellness Partner
             </p>
           </div>
         </div>
 
         {/* Navigation Tabs (Desktop) */}
-        <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 bg-[#fbf9fe] p-1 rounded-2xl border border-[#ebdff3]">
+        <nav className="hidden md:flex items-center space-x-1 bg-[#F5F5EF] p-1 rounded-xl border border-[#E3E8E1]">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentTab === item.id;
@@ -69,13 +71,13 @@ export default function Navigation({
               <button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id)}
-                className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs lg:text-sm font-medium transition-all ${
+                className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs lg:text-[13px] font-medium transition-all ${
                   isActive
-                    ? 'bg-white text-[#7c469b] shadow-soft border border-[#ebdff3]'
-                    : 'text-[#766585] hover:text-[#553267] hover:bg-white/60'
-                } ${item.highlight && !isActive ? 'text-[#945bb7]' : ''}`}
+                    ? 'bg-white text-[#173F35] shadow-sm font-semibold border border-[#E3E8E1]'
+                    : 'text-[#727B74] hover:text-[#173F35] hover:bg-white/60'
+                } ${item.highlight && !isActive ? 'text-[#477C68] font-semibold' : ''}`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#7c469b]' : 'text-[#945bb7]'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#173F35]' : item.highlight ? 'text-[#477C68]' : 'text-[#727B74]'}`} />
                 <span>{item.label}</span>
               </button>
             );
@@ -85,21 +87,21 @@ export default function Navigation({
         {/* Right Status & Profile Controls */}
         <div className="flex items-center space-x-2.5">
           {demoMode && (
-            <div className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#f3eef8] text-[#7c469b] text-xs font-medium border border-[#dec7ea]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#7c469b]" />
+            <div className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#EDF3ED] text-[#173F35] text-xs font-medium border border-[#D0DDD0]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#477C68]" />
               <span>Demo Mode</span>
             </div>
           )}
 
           <button
             onClick={() => setCurrentTab('profile')}
-            className="flex items-center space-x-2 pl-2 pr-3 py-1.5 rounded-2xl bg-[#faf7fc] hover:bg-[#f3eef8] border border-[#ebdff3] transition-all"
+            className="flex items-center space-x-2 pl-1.5 pr-3 py-1 rounded-lg bg-[#FAF9F5] hover:bg-[#EDF3ED] border border-[#E3E8E1] transition-all"
             title="User Profile"
           >
-            <div className="w-7 h-7 rounded-full bg-[#7c469b] text-white flex items-center justify-center text-xs font-semibold">
+            <div className="w-7 h-7 rounded-md bg-[#173F35] text-white flex items-center justify-center text-xs font-semibold">
               {user?.name ? user.name[0] : 'K'}
             </div>
-            <span className="text-xs font-medium text-[#553267] hidden lg:inline max-w-[100px] truncate">
+            <span className="text-xs font-medium text-[#252D29] hidden lg:inline max-w-[100px] truncate">
               {user?.name || 'Kavya Gada'}
             </span>
           </button>
@@ -107,7 +109,7 @@ export default function Navigation({
       </div>
 
       {/* Mobile Horizontal Sub-Navigation */}
-      <div className="flex md:hidden overflow-x-auto space-x-1 pt-2.5 mt-2 border-t border-[#f4f0fa] no-scrollbar">
+      <div className="flex md:hidden overflow-x-auto space-x-1.5 pt-2.5 mt-2 border-t border-[#E3E8E1] no-scrollbar">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentTab === item.id;
@@ -115,10 +117,10 @@ export default function Navigation({
             <button
               key={item.id}
               onClick={() => setCurrentTab(item.id)}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs whitespace-nowrap font-medium transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap font-medium transition-all ${
                 isActive
-                  ? 'bg-[#7c469b] text-white'
-                  : 'bg-[#fbf9fe] text-[#766585] border border-[#ebdff3]'
+                  ? 'bg-[#173F35] text-white shadow-sm'
+                  : 'bg-white text-[#727B74] border border-[#E3E8E1]'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -130,4 +132,3 @@ export default function Navigation({
     </header>
   );
 }
-

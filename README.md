@@ -4,11 +4,41 @@
 
 ---
 
+## 🌐 Live Deployment
+
+| Component | URL |
+|---|---|
+| **Live Web Application** | https://bodywise-ai-companion.vercel.app |
+| **Backend API** | https://bodywise-backend-xoyc.onrender.com |
+| **Swagger Documentation** | https://bodywise-backend-xoyc.onrender.com/docs |
+| **System Health** | https://bodywise-backend-xoyc.onrender.com/api/health |
+| **GitHub Repository** | https://github.com/kavyagada20/bodywise-ai-companion |
+
+---
+
 ## 🌟 Project Overview
 
-**Bodywise AI Companion** is an Agentic AI-powered personal-care assistant designed to guide customers through their personal-care journey. 
+**Bodywise AI Companion** is an Agentic AI-powered personal-care assistant designed to guide customers through their personal-care journey. Built with a premium **Sage & Forest Green** design system, the application pairs high-trust clinical wellness branding with multi-agent intelligence.
 
 While conventional chatbots operate as passive, single-turn Q&A interfaces, Bodywise AI Companion coordinates **five specialized AI agents** through **LangGraph**. The system maintains user context, retrieves verified Be Bodywise product formulations via **Retrieval-Augmented Generation (RAG)**, manages dynamic morning and evening routine schedules with **human-in-the-loop approval**, tracks weekly adherence analytics, and enforces safety triage for adverse reactions or chemical sensitivities.
+
+---
+
+## 🎨 Premium Sage & Forest Green Design System
+
+The application features a bespoke, production-ready wellness UI design:
+
+| Token | Role | Hex Code |
+|---|---|---|
+| **Primary Forest Green** | Deep forest buttons, primary headers, active nav | `#173F35` |
+| **Secondary Green** | Interactive elements, chart curves | `#477C68` |
+| **Sage Green** | Accents, badges, muted borders | `#A8BDA9` |
+| **Light Sage** | Card accents, soft highlights | `#EDF3ED` |
+| **Page Background** | Warm off-white page canvas | `#F5F5EF` |
+| **Card Background** | Clean white cards | `#FFFFFF` |
+| **Main Text** | Dark charcoal body & headings | `#252D29` |
+| **Secondary Text** | Muted grey-green captions | `#727B74` |
+| **Borders** | Soft subtle grey-green | `#E3E8E1` |
 
 ---
 
@@ -72,8 +102,8 @@ flowchart TD
 
 ## 🛠️ Technology Stack
 
-- **Frontend:** Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Lucide React icons, Recharts.
-- **Backend:** Python 3.11+, FastAPI, Pydantic v2, SQLAlchemy 2.0, SQLite (local) / PostgreSQL-compatible.
+- **Frontend:** Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Lucide React icons, Recharts (Hosted on **Vercel**).
+- **Backend:** Python 3.11+, FastAPI, Pydantic v2, SQLAlchemy 2.0, SQLite (local) / PostgreSQL (production) (Hosted on **Render**).
 - **Agentic AI & Orchestration:** LangGraph (StateGraph), Google Gemini API (`google.generativeai`), Hybrid TF-IDF & Cosine Similarity Vector Retrieval.
 - **Testing:** Pytest, FastAPI TestClient.
 - **Containerisation:** Docker, Docker Compose.
@@ -118,20 +148,20 @@ Bodywise AI Companion/
 │   │   └── icon.svg                   # Brand Favicon SVG Asset
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── globals.css            # Soft Lavender Theme & Custom Utility Classes
+│   │   │   ├── globals.css            # Sage & Forest Green Theme & Utility Tokens
 │   │   │   ├── layout.tsx             # Root Layout & Metadata
 │   │   │   └── page.tsx               # Main Dashboard & View Orchestrator
 │   │   ├── components/
 │   │   │   ├── CompanionView.tsx      # Agentic Chat, Traces & Human-in-the-Loop UI
-│   │   │   ├── DashboardView.tsx      # Overview Dashboard, Quick Actions & Checklist
-│   │   │   ├── Navigation.tsx         # Responsive Header, Brand Pill & Profile Chip
+│   │   │   ├── DashboardView.tsx      # Overview Dashboard, Quick Actions & Regimen
+│   │   │   ├── Navigation.tsx         # Responsive Header, Brand Mark & Profile Control
 │   │   │   ├── ProductsView.tsx       # Verified Product Discovery & Detail Modal
 │   │   │   ├── ProfileView.tsx        # 9-Step Personalisation Onboarding Wizard
 │   │   │   ├── ProgressView.tsx       # Recharts Analytics & Weekly Check-in Form
 │   │   │   ├── RoutineView.tsx        # Morning & Evening Schedules & Reminders
 │   │   │   └── SettingsView.tsx       # Configuration, Demo Toggle & Ticket Logs
 │   │   └── lib/
-│   │       └── api.ts                 # Typed REST Client & Auth State Management
+│   │       └── api.ts                 # Dynamic Cloud Resolution & Typed REST Client
 │   ├── .dockerignore
 │   ├── .env.example
 │   ├── Dockerfile
@@ -219,10 +249,7 @@ The application includes an pre-seeded reviewer profile so evaluators can test i
 
 - **Email:** `kavya@bodywise.demo`
 - **Password:** `demo123`
-- **One-Click Access:** The web application automatically authenticates as this demonstration user upon launch or via the **Demo Login** button.
-
-> **Why include demo credentials?**  
-> Supplying pre-seeded test credentials in README documentation is standard for technical challenge evaluations and portfolio assessments. It guarantees reviewers zero friction during evaluation while ensuring real user passwords and production credentials remain strictly protected.
+- **One-Click Access:** The web application automatically authenticates as this demonstration user upon launch or via the **Demo Mode** indicator.
 
 ---
 
@@ -254,15 +281,6 @@ backend/tests/test_api.py::test_demo_6_safety_escalation PASSED          [100%]
 ======================= 9 passed in 4.64s =======================
 ```
 
-### The 6 Acceptance Criteria Workflows
-
-1. **Demo 1 — Onboarding to Personalized Dashboard:** User completes the 9-question profile; backend structures a targeted regimen (e.g. Salicylic Acid Wash + Redensyl Serum) and updates Overview.
-2. **Demo 2 — AI Routine Proposal with Human Approval:** User requests a routine in chat; Routine Management Agent generates a proposal card; clicking **Approve & Save Routine** persists the routine to the database.
-3. **Demo 3 — Task Completion & Adherence Updates:** Toggling routine task checkboxes dynamically recalculates completion percentages and updates the 7-day adherence trajectory.
-4. **Demo 4 — Grounded Product Knowledge (RAG):** Inquiries regarding active ingredients or usage instructions return grounded answers with verified source links.
-5. **Demo 5 — Weekly Check-in & AI Review:** Submitting weekly feedback triggers the Progress Tracking Agent to generate an adherence assessment and actionable habit nudges.
-6. **Demo 6 — Safety Escalation Pathway:** Mentioning adverse symptoms (e.g., stinging, burning, allergic rash) triggers safety triage, halts product usage, and generates a support ticket (`#BW-ESC-...`).
-
 ---
 
 ## 🔒 Security & Responsible AI Safeguards
@@ -272,15 +290,6 @@ backend/tests/test_api.py::test_demo_6_safety_escalation PASSED          [100%]
 3. **Grounded Source Bounding:** The Product Knowledge Agent is grounded against verified public Be Bodywise formulations to eliminate ingredient hallucination.
 4. **Adverse Reaction Escalation:** Customers reporting severe irritation receive immediate triage instructions and an auto-generated support escalation ticket.
 5. **Zero Secret Exposure:** Environment variables are strictly separated between backend and client-safe public variables; all real `.env` files and databases are git-ignored.
-
----
-
-## 🔮 Future Enhancements
-
-- **Push Notification Service:** Web push and WhatsApp notifications for daily morning and evening reminders.
-- **Computer Vision Scalp/Skin Analysis:** Camera-based progress photo comparisons to visually monitor barrier recovery over 12 weeks.
-- **Direct ERP Order Integration:** Real-time Be Bodywise replenishment order tracking and subscription reminders.
-- **Dermatologist Tele-consult Integration:** Seamless handoff from AI support tickets to licensed tele-health dermatologists.
 
 ---
 
