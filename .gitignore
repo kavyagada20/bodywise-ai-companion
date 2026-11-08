@@ -98,3 +98,7 @@ Desktop.ini
 *.swp
 *.swo
 *~
+
+# ----------------- 6. Local Scratch & Prompt Files -----------------
+prompt_to_run.txt
+
