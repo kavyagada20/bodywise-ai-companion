@@ -293,12 +293,17 @@ export default function CompanionView({
                   <div
                     className={`max-w-[85%] rounded-xl text-xs md:text-sm leading-relaxed ${
                       isUser
-                        ? 'bg-[#173F35] text-white p-4 shadow-sm'
+                        ? 'bg-[#173F35] text-white p-3.5 md:p-4 shadow-sm'
                         : 'bg-[#FAF9F5] text-[#252D29] border border-[#E3E8E1] p-5 shadow-subtle'
                     }`}
                   >
-                    {/* A. If message is a Safety Advisory, render structured safety UI */}
-                    {ticketDetails ? (
+                    {isUser ? (
+                      /* User message: clean, high-contrast white text */
+                      <div className="text-white text-xs md:text-sm font-normal whitespace-pre-wrap leading-relaxed selection:bg-[#477C68] selection:text-white">
+                        {msg.content}
+                      </div>
+                    ) : ticketDetails ? (
+                      /* A. If message is a Safety Advisory, render structured safety UI */
                       <div className="space-y-4">
                         {/* Advisory Header */}
                         <div className="p-3.5 rounded-lg bg-[#FAF0ED] border border-[#F2C5BD] flex items-start space-x-3">
