@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: bodywise-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PROJECT_NAME
+        value: Bodywise AI Companion
+      - key: DEMO_MODE
+        value: "true"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bodywise-db
+          property: connectionString
+
+databases:
+  - name: bodywise-db
+    databaseName: bodywise
+    user: bodywise_user
+    plan: free
