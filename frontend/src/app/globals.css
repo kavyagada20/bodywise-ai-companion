@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fbf9fe;
+  --foreground: #2d1d3a;
+  --card: #ffffff;
+  --card-foreground: #2d1d3a;
+  --primary: #7c469b;
+  --primary-foreground: #ffffff;
+  --secondary: #f3eef8;
+  --secondary-foreground: #553267;
+  --muted: #f4f0fa;
+  --muted-foreground: #766585;
+  --accent: #945bb7;
+  --accent-foreground: #ffffff;
+  --border: #ebdff3;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Custom scrollbars for clean UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #dec7ea;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ae7ecc;
+}
+
+.wellness-gradient {
+  background: linear-gradient(135deg, #faf7fc 0%, #f4eef9 50%, #f9f4fd 100%);
+}
+
+.wellness-card {
+  background: #ffffff;
+  border: 1px solid #ebdff3;
+  box-shadow: 0 4px 20px -2px rgba(124, 70, 155, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  border-radius: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wellness-card:hover {
+  border-color: #dec7ea;
+  box-shadow: 0 8px 24px -4px rgba(124, 70, 155, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+}
+
+.lavender-pill {
+  background-color: #f3eef8;
+  color: #7c469b;
+  border: 1px solid #dec7ea;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+

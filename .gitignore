@@ -1,0 +1,100 @@
+# ==============================================================================
+# Git Ignore Configuration — Bodywise AI Companion
+# ==============================================================================
+
+# ----------------- 1. Environment & Secret Files -----------------
+# Ignore all real environment files with sensitive credentials
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.*.local
+*.env
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.local
+frontend/.env.*
+
+# Always track example environment configuration templates
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# ----------------- 2. Python & Backend Artifacts -----------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/.venv/
+venv/
+.venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local databases (re-created and seeded automatically on application startup)
+*.db
+*.sqlite
+*.sqlite3
+backend/*.db
+backend/*.sqlite3
+
+# Backend runtime logs
+*.log
+backend/logs/
+
+# ----------------- 3. Next.js & Frontend Artifacts -----------------
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+frontend/build/
+dist/
+frontend/dist/
+.turbo/
+coverage/
+
+# Frontend log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ----------------- 4. Docker Runtime & Local Volumes -----------------
+# Machine-specific docker overrides and local mounted data
+docker-compose.override.yml
+docker-compose.override.yaml
+compose.override.yml
+compose.override.yaml
+.docker/
+backend/data/
+
+# NOTE: The project Docker configuration files below are intentionally NOT ignored:
+# - Dockerfile
+# - backend/Dockerfile
+# - frontend/Dockerfile
+# - docker-compose.yml
+# - .dockerignore
+
+# ----------------- 5. Operating System & IDE Files -----------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~

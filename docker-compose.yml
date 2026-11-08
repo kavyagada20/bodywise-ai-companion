@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bodywise_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=Bodywise AI Companion
+      - DATABASE_URL=sqlite:///./bodywise.db
+      - DEMO_MODE=${DEMO_MODE:-true}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - SECRET_KEY=${SECRET_KEY:-bodywise_secret_fellowship_challenge_2026_super_secure_key}
+    volumes:
+      - ./backend/data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bodywise_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
