@@ -158,8 +158,9 @@ export default function ProgressView({
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="sageAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#477C68" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#EDF3ED" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#173F35" stopOpacity={0.4} />
+                    <stop offset="50%" stopColor="#477C68" stopOpacity={0.2} />
+                    <stop offset="95%" stopColor="#A8BDA9" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E3E8E1" vertical={false} />
@@ -214,6 +215,36 @@ export default function ProgressView({
                 <Bar dataKey="completed" fill="#477C68" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* Actionable Dermatologist Tips & Weekly AI Insights */}
+      <div className="bg-gradient-to-br from-[#FAF9F5] via-[#EDF3ED]/40 to-white rounded-xl border border-[#D0DDD0] p-6 shadow-card">
+        <div className="flex items-start space-x-3.5">
+          <div className="w-10 h-10 rounded-lg bg-[#173F35] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+            <Sparkles className="w-5 h-5 text-[#A8BDA9]" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center space-x-2">
+              <h3 className="text-sm font-bold text-[#173F35]">Clinical Dermatologist Insights &amp; Active Protocol</h3>
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDF3ED] text-[#2F855A] border border-[#D0DDD0]">
+                Verified Care Model
+              </span>
+            </div>
+            <p className="text-xs text-[#252D29] mt-1.5 leading-relaxed">
+              Based on your <strong>{weeklyAdherence}% weekly consistency</strong> and active habit trajectory, follicular and epidermal cellular response is progressing within normal parameters.
+            </p>
+            <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div className="p-3 rounded-lg bg-white border border-[#E3E8E1] space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#477C68] block">Dermatologist Tip #1</span>
+                <p className="text-[#727B74] leading-relaxed">Allow active serums (Salicylic Acid / Redensyl) 90–120 seconds to fully absorb before applying hydrators or barrier cremes.</p>
+              </div>
+              <div className="p-3 rounded-lg bg-white border border-[#E3E8E1] space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#477C68] block">Dermatologist Tip #2</span>
+                <p className="text-[#727B74] leading-relaxed">Consistency beats intensity: missing a single dose is completely fine, but never double-apply actives on the next day.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

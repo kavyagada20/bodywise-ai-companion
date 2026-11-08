@@ -21,7 +21,9 @@ import {
   ShieldAlert,
   Ticket,
   Mail,
-  AlertCircle
+  AlertCircle,
+  Copy,
+  Check
 } from 'lucide-react';
 import { apiChatWithCompanion, apiApproveAction, apiResetConversation } from '@/lib/api';
 
@@ -43,8 +45,17 @@ export default function CompanionView({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedTraceId, setExpandedTraceId] = useState<number | null>(null);
   const [approvingAction, setApprovingAction] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<number | string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleCopyMessage = (id: number | string, text: string) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
 
   const suggestedPrompts = [
     'Help me create a hair-care routine',
@@ -62,8 +73,11 @@ export default function CompanionView({
   }, [conversation]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isSubmitting]);
+    const timer = setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [messages, isSubmitting, expandedTraceId]);
 
   useEffect(() => {
     if (initialPrompt) {
@@ -213,14 +227,21 @@ export default function CompanionView({
           </div>
         </div>
 
-        <button
-          onClick={handleReset}
-          className="px-3 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-[#EDF3ED] border border-[#E3E8E1] text-xs font-semibold text-[#727B74] hover:text-[#173F35] flex items-center space-x-1.5 transition-all shadow-subtle"
-          title="Start fresh conversation"
-        >
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">New Consultation</span>
-        </button>
+        <div className="flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#FAF9F5] border border-[#E3E8E1] text-[11px] font-medium text-[#477C68]">
+            <Sparkles className="w-3.5 h-3.5 text-[#477C68]" />
+            <span>Gemini 2.5 Flash • LangGraph Agent Orchestrator</span>
+          </div>
+
+          <button
+            onClick={handleReset}
+            className="px-3 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-[#EDF3ED] border border-[#E3E8E1] text-xs font-semibold text-[#727B74] hover:text-[#173F35] flex items-center space-x-1.5 transition-all shadow-subtle"
+            title="Start fresh conversation"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">New Consultation</span>
+          </button>
+        </div>
       </div>
 
       {/* 2. Suggested Quick Prompts */}
@@ -287,6 +308,25 @@ export default function CompanionView({
                     )}
                     <span>•</span>
                     <span>{new Date(msg.timestamp || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    {!isUser && (
+                      <button
+                        onClick={() => handleCopyMessage(msg.id, msg.content)}
+                        className="ml-2 inline-flex items-center space-x-1 text-[11px] text-[#727B74] hover:text-[#173F35] transition-colors p-0.5 px-1.5 rounded bg-white hover:bg-[#EDF3ED] border border-[#E3E8E1]"
+                        title="Copy message to clipboard"
+                      >
+                        {copiedId === msg.id ? (
+                          <>
+                            <Check className="w-3 h-3 text-[#2F855A]" />
+                            <span className="text-[10px] text-[#2F855A] font-semibold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3 text-[#727B74]" />
+                            <span className="text-[10px]">Copy</span>
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
 
                   {/* Message Bubble Container */}

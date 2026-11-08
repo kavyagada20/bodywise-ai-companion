@@ -13,7 +13,8 @@ import {
   AlertTriangle,
   CheckCircle2,
   X,
-  Sparkles
+  Sparkles,
+  Plus
 } from 'lucide-react';
 
 interface ProductsViewProps {
@@ -176,15 +177,26 @@ export default function ProductsView({
                 className="text-xs font-semibold text-[#173F35] hover:text-[#477C68] flex items-center space-x-1"
               >
                 <Bot className="w-3.5 h-3.5 text-[#477C68]" />
-                <span>Ask AI Expert</span>
+                <span>Ask AI</span>
               </button>
 
-              <button
-                onClick={() => setActiveModalProduct(prod)}
-                className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#FAF9F5] hover:bg-[#EDF3ED] text-[#252D29] border border-[#E3E8E1]"
-              >
-                Clinical Details →
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => onAskAI(`I want to incorporate ${prod.name} into my daily regimen. Propose an updated routine schedule with clinical safety review.`)}
+                  className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#EDF3ED] hover:bg-[#D0DDD0] text-[#173F35] border border-[#D0DDD0] flex items-center space-x-1 transition-all"
+                  title="Generate AI routine update"
+                >
+                  <Plus className="w-3.5 h-3.5 text-[#477C68]" />
+                  <span>Add to Routine</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveModalProduct(prod)}
+                  className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#FAF9F5] hover:bg-[#EDF3ED] text-[#252D29] border border-[#E3E8E1] transition-all"
+                >
+                  Details →
+                </button>
+              </div>
             </div>
           </div>
         ))}
@@ -228,10 +240,20 @@ export default function ProductsView({
 
               {activeModalProduct.key_actives && (
                 <div className="p-3 bg-[#FAF9F5] rounded-lg border border-[#E3E8E1]">
-                  <h4 className="font-bold text-[#173F35] uppercase tracking-wider text-[11px] mb-1">Key Active Ingredients</h4>
-                  <p className="font-medium">{activeModalProduct.key_actives}</p>
+                  <h4 className="font-bold text-[#173F35] uppercase tracking-wider text-[11px] mb-1">Key Active Ingredients &amp; Concentrations</h4>
+                  <p className="font-medium text-[#173F35]">{activeModalProduct.key_actives}</p>
                 </div>
               )}
+
+              <div className="p-3 bg-[#EDF3ED]/60 rounded-lg border border-[#D0DDD0]">
+                <h4 className="font-bold text-[#173F35] uppercase tracking-wider text-[11px] mb-1 flex items-center space-x-1">
+                  <Sparkles className="w-3.5 h-3.5 text-[#477C68]" />
+                  <span>Clinical Rationale &amp; Barrier Safety</span>
+                </h4>
+                <p className="text-[#252D29] leading-relaxed text-[11px]">
+                  Dermatologically formulated to optimize epidermal penetration while respecting cellular lipid structure. Pairs synergistically with complementary hydrators.
+                </p>
+              </div>
 
               {activeModalProduct.usage_instructions && (
                 <div>
@@ -266,25 +288,39 @@ export default function ProductsView({
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#E3E8E1] flex items-center justify-between">
+            <div className="mt-6 pt-4 border-t border-[#E3E8E1] flex flex-wrap items-center justify-between gap-3">
               <button
                 onClick={() => {
                   const prod = activeModalProduct;
                   setActiveModalProduct(null);
-                  onAskAI(`Can you explain the science behind ${prod.name} and how it compares to alternatives?`);
+                  onAskAI(`I would like to add ${prod.name} into my daily regimen. Can you generate an AI proposal for my morning or evening routine with clinical safety review?`);
                 }}
-                className="px-3.5 py-2 rounded-lg bg-[#EDF3ED] text-[#173F35] text-xs font-semibold hover:bg-[#D0DDD0] flex items-center space-x-1.5"
+                className="px-3.5 py-2 rounded-lg bg-[#173F35] text-white text-xs font-semibold hover:bg-[#1F4F43] flex items-center space-x-1.5 shadow-sm"
               >
-                <Bot className="w-4 h-4 text-[#477C68]" />
-                <span>Discuss with AI Companion</span>
+                <Plus className="w-4 h-4 text-[#A8BDA9]" />
+                <span>Add to My Routine (AI Proposal)</span>
               </button>
 
-              <button
-                onClick={() => setActiveModalProduct(null)}
-                className="px-4 py-2 rounded-lg bg-[#173F35] text-white text-xs font-semibold hover:bg-[#1F4F43]"
-              >
-                Done
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => {
+                    const prod = activeModalProduct;
+                    setActiveModalProduct(null);
+                    onAskAI(`Can you explain the science behind ${prod.name} and how it compares to alternatives?`);
+                  }}
+                  className="px-3 py-2 rounded-lg bg-[#EDF3ED] text-[#173F35] text-xs font-semibold hover:bg-[#D0DDD0] flex items-center space-x-1.5"
+                >
+                  <Bot className="w-3.5 h-3.5 text-[#477C68]" />
+                  <span>Ask AI</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveModalProduct(null)}
+                  className="px-3 py-2 rounded-lg bg-white border border-[#E3E8E1] text-[#727B74] hover:text-[#173F35] text-xs font-semibold"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>

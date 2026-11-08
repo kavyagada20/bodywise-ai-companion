@@ -50,6 +50,9 @@ export default function DashboardView({
   const adherence = progressStats?.weekly_adherence || 85;
   const streak = progressStats?.current_streak_days || 4;
 
+  const activeProducts = Array.from(new Set(routineTasks.filter(t => t.product_name).map(t => t.product_name)));
+  const activeProductsCount = activeProducts.length > 0 ? activeProducts.length : (recommendedProducts?.length || 4);
+
   const morningTasks = routineTasks.filter((t) => t.time_of_day === 'morning');
   const eveningTasks = routineTasks.filter((t) => t.time_of_day === 'evening' || t.time_of_day === 'night');
 
@@ -102,14 +105,40 @@ export default function DashboardView({
 
             <div className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-3 min-w-[130px]">
               <div className="w-10 h-10 rounded-lg bg-[#EDF3ED] text-[#173F35] flex items-center justify-center font-bold">
-                <Calendar className="w-5 h-5 text-[#173F35]" />
+                <Leaf className="w-5 h-5 text-[#173F35]" />
               </div>
               <div>
-                <p className="text-[11px] text-[#727B74] font-medium uppercase tracking-wide">Weekly Review</p>
-                <p className="text-sm font-bold text-[#173F35]">Sunday</p>
+                <p className="text-[11px] text-[#727B74] font-medium uppercase tracking-wide">Active Products</p>
+                <p className="text-lg font-bold text-[#173F35]">{activeProductsCount}</p>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Quick Action Pills */}
+        <div className="mt-6 pt-5 border-t border-[#E3E8E1] flex flex-wrap items-center gap-2.5">
+          <span className="text-xs font-semibold text-[#727B74]">Quick Actions:</span>
+          <button
+            onClick={() => onNavigate('routine', { timeOfDay: 'morning' })}
+            className="px-3.5 py-1.5 rounded-full bg-[#EDF3ED] hover:bg-[#D0DDD0] text-[#173F35] text-xs font-semibold transition-all border border-[#D0DDD0] flex items-center space-x-1.5 shadow-xs"
+          >
+            <Sun className="w-3.5 h-3.5 text-[#B7791F]" />
+            <span>Start Morning Regimen</span>
+          </button>
+          <button
+            onClick={() => onNavigate('companion')}
+            className="px-3.5 py-1.5 rounded-full bg-[#173F35] hover:bg-[#1F4F43] text-white text-xs font-semibold transition-all shadow-xs flex items-center space-x-1.5"
+          >
+            <Bot className="w-3.5 h-3.5 text-[#A8BDA9]" />
+            <span>Consult Companion</span>
+          </button>
+          <button
+            onClick={() => onNavigate('progress')}
+            className="px-3.5 py-1.5 rounded-full bg-white hover:bg-[#FAF9F5] text-[#252D29] text-xs font-semibold transition-all border border-[#E3E8E1] flex items-center space-x-1.5 shadow-xs"
+          >
+            <TrendingUp className="w-3.5 h-3.5 text-[#477C68]" />
+            <span>Log Check-in</span>
+          </button>
         </div>
       </div>
 
@@ -134,17 +163,48 @@ export default function DashboardView({
               </button>
             </div>
 
-            {/* Daily Adherence Progress Bar */}
-            <div className="mb-6 p-4 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1]">
-              <div className="flex justify-between text-xs font-medium mb-2">
-                <span className="text-[#252D29]">Daily Completion</span>
-                <span className="text-[#173F35] font-bold">{progressPercent}%</span>
+            {/* Daily Adherence Progress Card with Circular Ring */}
+            <div className="mb-6 p-4 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center justify-between gap-4">
+              <div className="flex items-center space-x-4">
+                <div className="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-14 h-14 -rotate-90" viewBox="0 0 56 56">
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="22"
+                      className="text-[#E3E8E1]"
+                      strokeWidth="5"
+                      stroke="currentColor"
+                      fill="transparent"
+                    />
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="22"
+                      className="text-[#173F35] transition-all duration-700 ease-out"
+                      strokeWidth="5"
+                      strokeDasharray={138.23}
+                      strokeDashoffset={138.23 - (138.23 * progressPercent) / 100}
+                      strokeLinecap="round"
+                      stroke="currentColor"
+                      fill="transparent"
+                    />
+                  </svg>
+                  <span className="absolute text-xs font-bold text-[#173F35]">
+                    {progressPercent}%
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[#173F35]">Daily Regimen Completion</h4>
+                  <p className="text-xs text-[#727B74] mt-0.5">
+                    {completedCount} of {totalCount} scheduled application steps completed today
+                  </p>
+                </div>
               </div>
-              <div className="w-full h-2 bg-[#E3E8E1] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#173F35] transition-all duration-500 rounded-full"
-                  style={{ width: `${progressPercent}%` }}
-                />
+              <div className="hidden sm:block text-right">
+                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#EDF3ED] text-[#173F35] border border-[#D0DDD0]">
+                  {progressPercent === 100 ? 'Fully Completed' : `${totalCount - completedCount} Steps Remaining`}
+                </span>
               </div>
             </div>
 

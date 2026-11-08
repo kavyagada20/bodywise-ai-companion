@@ -155,53 +155,63 @@ export default function RoutineView({
           {morningTasks.length === 0 ? (
             <p className="text-xs text-[#727B74] py-8 text-center">No morning steps scheduled.</p>
           ) : (
-            <div className="space-y-3">
-              {morningTasks.map((task) => (
-                <div
-                  key={task.id}
-                  className={`p-3.5 rounded-xl border transition-all ${
-                    task.is_completed_today
-                      ? 'bg-[#EDF3ED]/40 border-[#D0DDD0]'
-                      : 'bg-[#FAF9F5] border-[#E3E8E1] hover:border-[#A8BDA9]'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start space-x-3">
-                      <button
-                        onClick={() => onToggleTask(task.id, task.is_completed_today)}
-                        className="mt-0.5 flex-shrink-0 transition-transform active:scale-90"
-                      >
-                        {task.is_completed_today ? (
-                          <CheckCircle2 className="w-5 h-5 text-[#2F855A] fill-[#EDF3ED]" />
-                        ) : (
-                          <Circle className="w-5 h-5 text-[#D0DDD0] hover:text-[#477C68]" />
-                        )}
-                      </button>
-                      <div>
-                        <h4
-                          className={`text-sm font-semibold ${
-                            task.is_completed_today ? 'text-[#727B74] line-through' : 'text-[#252D29]'
-                          }`}
+              <div className="space-y-3">
+                {morningTasks.map((task, idx) => (
+                  <div
+                    key={task.id}
+                    className={`p-3.5 rounded-xl border transition-all duration-200 ${
+                      task.is_completed_today
+                        ? 'bg-[#EDF3ED]/50 border-[#D0DDD0]'
+                        : 'bg-[#FAF9F5] border-[#E3E8E1] hover:border-[#A8BDA9] hover:shadow-xs'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-start space-x-3">
+                        <button
+                          onClick={() => onToggleTask(task.id, task.is_completed_today)}
+                          className="mt-0.5 flex-shrink-0 transition-all duration-200 transform hover:scale-110 active:scale-95"
+                          title={task.is_completed_today ? "Mark as pending" : "Mark as completed"}
                         >
-                          {task.title}
-                        </h4>
-                        <p className="text-xs text-[#727B74] mt-1 leading-relaxed">
-                          {task.description}
-                        </p>
-                        {task.product_name && (
-                          <span className="inline-block mt-2 text-[11px] font-medium text-[#173F35] bg-white px-2 py-0.5 rounded border border-[#E3E8E1]">
-                            {task.product_name}
-                          </span>
-                        )}
+                          {task.is_completed_today ? (
+                            <CheckCircle2 className="w-5 h-5 text-[#2F855A] fill-[#EDF3ED] transition-transform duration-200" />
+                          ) : (
+                            <Circle className="w-5 h-5 text-[#D0DDD0] hover:text-[#477C68] transition-colors" />
+                          )}
+                        </button>
+                        <div>
+                          <div className="flex items-center space-x-2 mb-1">
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#173F35] text-white shadow-2xs">
+                              Step {idx + 1}
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white text-[#727B74] border border-[#E3E8E1]">
+                              Daily
+                            </span>
+                          </div>
+                          <h4
+                            className={`text-sm font-semibold transition-colors ${
+                              task.is_completed_today ? 'text-[#727B74] line-through' : 'text-[#252D29]'
+                            }`}
+                          >
+                            {task.title}
+                          </h4>
+                          <p className="text-xs text-[#727B74] mt-1 leading-relaxed">
+                            {task.description}
+                          </p>
+                          {task.product_name && (
+                            <span className="inline-block mt-2 text-[11px] font-medium text-[#173F35] bg-white px-2 py-0.5 rounded border border-[#E3E8E1] shadow-2xs">
+                              {task.product_name}
+                            </span>
+                          )}
+                        </div>
                       </div>
+                      <span className="text-xs text-[#727B74] bg-white px-2 py-1 rounded-md border border-[#E3E8E1] flex-shrink-0 flex items-center space-x-1">
+                        <Clock className="w-3 h-3 text-[#477C68]" />
+                        <span>{task.scheduled_time}</span>
+                      </span>
                     </div>
-                    <span className="text-xs text-[#727B74] bg-white px-2 py-1 rounded-md border border-[#E3E8E1] flex-shrink-0">
-                      {task.scheduled_time}
-                    </span>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
           )}
         </div>
 
@@ -226,30 +236,39 @@ export default function RoutineView({
             <p className="text-xs text-[#727B74] py-8 text-center">No evening steps scheduled.</p>
           ) : (
             <div className="space-y-3">
-              {eveningTasks.map((task) => (
+              {eveningTasks.map((task, idx) => (
                 <div
                   key={task.id}
-                  className={`p-3.5 rounded-xl border transition-all ${
+                  className={`p-3.5 rounded-xl border transition-all duration-200 ${
                     task.is_completed_today
-                      ? 'bg-[#EDF3ED]/40 border-[#D0DDD0]'
-                      : 'bg-[#FAF9F5] border-[#E3E8E1] hover:border-[#A8BDA9]'
+                      ? 'bg-[#EDF3ED]/50 border-[#D0DDD0]'
+                      : 'bg-[#FAF9F5] border-[#E3E8E1] hover:border-[#A8BDA9] hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start space-x-3">
                       <button
                         onClick={() => onToggleTask(task.id, task.is_completed_today)}
-                        className="mt-0.5 flex-shrink-0 transition-transform active:scale-90"
+                        className="mt-0.5 flex-shrink-0 transition-all duration-200 transform hover:scale-110 active:scale-95"
+                        title={task.is_completed_today ? "Mark as pending" : "Mark as completed"}
                       >
                         {task.is_completed_today ? (
-                          <CheckCircle2 className="w-5 h-5 text-[#2F855A] fill-[#EDF3ED]" />
+                          <CheckCircle2 className="w-5 h-5 text-[#2F855A] fill-[#EDF3ED] transition-transform duration-200" />
                         ) : (
-                          <Circle className="w-5 h-5 text-[#D0DDD0] hover:text-[#477C68]" />
+                          <Circle className="w-5 h-5 text-[#D0DDD0] hover:text-[#477C68] transition-colors" />
                         )}
                       </button>
                       <div>
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#173F35] text-white shadow-2xs">
+                            Step {idx + 1}
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white text-[#727B74] border border-[#E3E8E1]">
+                            Daily
+                          </span>
+                        </div>
                         <h4
-                          className={`text-sm font-semibold ${
+                          className={`text-sm font-semibold transition-colors ${
                             task.is_completed_today ? 'text-[#727B74] line-through' : 'text-[#252D29]'
                           }`}
                         >
@@ -259,14 +278,15 @@ export default function RoutineView({
                           {task.description}
                         </p>
                         {task.product_name && (
-                          <span className="inline-block mt-2 text-[11px] font-medium text-[#173F35] bg-white px-2 py-0.5 rounded border border-[#E3E8E1]">
+                          <span className="inline-block mt-2 text-[11px] font-medium text-[#173F35] bg-white px-2 py-0.5 rounded border border-[#E3E8E1] shadow-2xs">
                             {task.product_name}
                           </span>
                         )}
                       </div>
                     </div>
-                    <span className="text-xs text-[#727B74] bg-white px-2 py-1 rounded-md border border-[#E3E8E1] flex-shrink-0">
-                      {task.scheduled_time}
+                    <span className="text-xs text-[#727B74] bg-white px-2 py-1 rounded-md border border-[#E3E8E1] flex-shrink-0 flex items-center space-x-1">
+                      <Clock className="w-3 h-3 text-[#477C68]" />
+                      <span>{task.scheduled_time}</span>
                     </span>
                   </div>
                 </div>
