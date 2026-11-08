@@ -67,7 +67,7 @@ export default function DashboardView({
         <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-to-bl from-[#EDF3ED] via-[#EDF3ED]/40 to-transparent rounded-full blur-2xl pointer-events-none -mr-16 -mt-16" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-          <div className="max-w-2xl">
+          <div className="flex-1 min-w-0 pr-0 lg:pr-6">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#EDF3ED] text-[#173F35] text-xs font-semibold mb-3 border border-[#D0DDD0]">
               <Leaf className="w-3.5 h-3.5 text-[#477C68]" />
               <span>Targeting: {concern}</span>
@@ -82,45 +82,45 @@ export default function DashboardView({
           </div>
 
           {/* Quick Metrics Strip */}
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3">
-            <div className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-3 min-w-[130px]">
-              <div className="w-10 h-10 rounded-lg bg-[#EDF3ED] text-[#173F35] flex items-center justify-center font-bold">
-                <Flame className="w-5 h-5 text-[#B7791F]" />
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-3 shrink-0">
+            <div className="px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-2.5 sm:space-x-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#EDF3ED] text-[#173F35] flex items-center justify-center font-bold flex-shrink-0">
+                <Flame className="w-4 h-4 sm:w-5 sm:h-5 text-[#B7791F]" />
               </div>
-              <div>
-                <p className="text-[11px] text-[#727B74] font-medium uppercase tracking-wide">Streak</p>
-                <p className="text-lg font-bold text-[#173F35]">{streak} Days</p>
-              </div>
-            </div>
-
-            <div className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-3 min-w-[130px]">
-              <div className="w-10 h-10 rounded-lg bg-[#EDF3ED] text-[#477C68] flex items-center justify-center font-bold">
-                <TrendingUp className="w-5 h-5 text-[#2F855A]" />
-              </div>
-              <div>
-                <p className="text-[11px] text-[#727B74] font-medium uppercase tracking-wide">Adherence</p>
-                <p className="text-lg font-bold text-[#173F35]">{adherence}%</p>
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-[11px] text-[#727B74] font-medium uppercase tracking-wide truncate">Streak</p>
+                <p className="text-sm sm:text-lg font-bold text-[#173F35] whitespace-nowrap">{streak} Days</p>
               </div>
             </div>
 
-            <div className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-3 min-w-[130px]">
-              <div className="w-10 h-10 rounded-lg bg-[#EDF3ED] text-[#173F35] flex items-center justify-center font-bold">
-                <Leaf className="w-5 h-5 text-[#173F35]" />
+            <div className="px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-2.5 sm:space-x-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#EDF3ED] text-[#477C68] flex items-center justify-center font-bold flex-shrink-0">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#2F855A]" />
               </div>
-              <div>
-                <p className="text-[11px] text-[#727B74] font-medium uppercase tracking-wide">Active Products</p>
-                <p className="text-lg font-bold text-[#173F35]">{activeProductsCount}</p>
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-[11px] text-[#727B74] font-medium uppercase tracking-wide truncate">Adherence</p>
+                <p className="text-sm sm:text-lg font-bold text-[#173F35] whitespace-nowrap">{adherence}%</p>
+              </div>
+            </div>
+
+            <div className="px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#FAF9F5] border border-[#E3E8E1] flex items-center space-x-2.5 sm:space-x-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#EDF3ED] text-[#173F35] flex items-center justify-center font-bold flex-shrink-0">
+                <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-[#173F35]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-[11px] text-[#727B74] font-medium uppercase tracking-wide truncate">Products</p>
+                <p className="text-sm sm:text-lg font-bold text-[#173F35] whitespace-nowrap">{activeProductsCount} Items</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Quick Action Pills */}
-        <div className="mt-6 pt-5 border-t border-[#E3E8E1] flex flex-wrap items-center gap-2.5">
-          <span className="text-xs font-semibold text-[#727B74]">Quick Actions:</span>
+        <div className="mt-5 pt-4 border-t border-[#E3E8E1] flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-[#727B74] mr-1">Quick Actions:</span>
           <button
             onClick={() => onNavigate('routine', { timeOfDay: 'morning' })}
-            className="px-3.5 py-1.5 rounded-full bg-[#EDF3ED] hover:bg-[#D0DDD0] text-[#173F35] text-xs font-semibold transition-all border border-[#D0DDD0] flex items-center space-x-1.5 shadow-xs"
+            className="px-3.5 py-1.5 rounded-full bg-[#FAF9F5] hover:bg-[#EDF3ED] text-[#173F35] text-xs font-semibold transition-all border border-[#E3E8E1] hover:border-[#D0DDD0] flex items-center space-x-1.5 shadow-2xs"
           >
             <Sun className="w-3.5 h-3.5 text-[#B7791F]" />
             <span>Start Morning Regimen</span>
@@ -134,7 +134,7 @@ export default function DashboardView({
           </button>
           <button
             onClick={() => onNavigate('progress')}
-            className="px-3.5 py-1.5 rounded-full bg-white hover:bg-[#FAF9F5] text-[#252D29] text-xs font-semibold transition-all border border-[#E3E8E1] flex items-center space-x-1.5 shadow-xs"
+            className="px-3.5 py-1.5 rounded-full bg-[#FAF9F5] hover:bg-[#EDF3ED] text-[#252D29] text-xs font-semibold transition-all border border-[#E3E8E1] hover:border-[#D0DDD0] flex items-center space-x-1.5 shadow-2xs"
           >
             <TrendingUp className="w-3.5 h-3.5 text-[#477C68]" />
             <span>Log Check-in</span>
